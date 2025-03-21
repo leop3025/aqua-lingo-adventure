@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				ocean: {
+					light: '#D3E4FD',
+					DEFAULT: '#0EA5E9',
+					deep: '#075985'
+				},
+				coral: {
+					light: '#FEF2F2',
+					DEFAULT: '#FB7185',
+					deep: '#BE123C'
+				},
+				sand: {
+					light: '#FEF9C3',
+					DEFAULT: '#FDE047',
+					deep: '#CA8A04'
 				}
 			},
 			borderRadius: {
@@ -70,25 +86,72 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-gentle': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
+				},
+				'wave': {
+					'0%': { transform: 'translateX(0)' },
+					'50%': { transform: 'translateX(-25%)' },
+					'100%': { transform: 'translateX(-50%)' }
+				},
+				'bubble-rise': {
+					'0%': { transform: 'translateY(100%)', opacity: '0' },
+					'50%': { opacity: '1' },
+					'100%': { transform: 'translateY(-100%)', opacity: '0' }
+				},
+				'fade-in-up': {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'rotate-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-gentle': 'pulse-gentle 4s ease-in-out infinite',
+				'wave': 'wave 15s linear infinite',
+				'bubble-rise': 'bubble-rise 8s linear infinite',
+				'fade-in-up': 'fade-in-up 0.6s ease-out',
+				'rotate-slow': 'rotate-slow 10s linear infinite'
+			},
+			backgroundImage: {
+				'ocean-gradient': 'linear-gradient(180deg, #E0F2FE 0%, #0EA5E9 100%)',
+				'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+				'underwater-light': 'radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.3) 0%, transparent 70%)'
+			},
+			boxShadow: {
+				'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
+				'neon': '0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3)'
+			},
+			typography: {
+				DEFAULT: {
+					css: {
+						maxWidth: '65ch',
+						a: {
+							textDecoration: 'none',
+							fontWeight: '500',
+							'&:hover': {
+								textDecoration: 'underline',
+							},
+						},
+					},
+				},
 			}
 		}
 	},
