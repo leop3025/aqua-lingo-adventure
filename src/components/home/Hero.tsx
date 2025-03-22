@@ -112,8 +112,8 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full transform -translate-y-10"></div>
               <img
-                src="/lumi.png"
-                alt="Lumi the friendly underwater guide"
+                src="/lovable-uploads/51785a16-8be3-4d70-ad98-532fb4ed9105.png"
+                alt="Lumi the friendly axolotl guide"
                 className="floating relative max-w-xs md:max-w-sm lg:max-w-md"
                 style={{ objectFit: 'contain', maxHeight: '400px' }}
               />

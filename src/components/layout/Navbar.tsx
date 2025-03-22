@@ -46,7 +46,7 @@ const Navbar = () => {
           onClick={closeMenu}
         >
           <img 
-            src="/lumi.png" 
+            src="/lovable-uploads/51785a16-8be3-4d70-ad98-532fb4ed9105.png" 
             alt="Lumi mascot" 
             className="h-12 w-12 object-contain animate-float" 
           />

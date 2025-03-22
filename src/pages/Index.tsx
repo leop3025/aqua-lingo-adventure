@@ -52,7 +52,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <img src="/lumi.png" alt="Lumi mascot" className="h-12 w-12 object-contain animate-pulse-slow" />
+                <img src="/lovable-uploads/51785a16-8be3-4d70-ad98-532fb4ed9105.png" alt="Lumi mascot" className="h-12 w-12 object-contain animate-pulse-slow" />
                 <span className="font-bold text-xl tracking-tight">Learning with Lumi</span>
               </div>
               <p className="text-white/80 max-w-md">
