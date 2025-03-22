@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import LearningPath from '@/components/learning/LearningPath';
-import Progress from '@/components/ui/Progress';
+import CustomProgress from '@/components/ui/CustomProgress';
 import { BookOpen, Target, Trophy, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -62,7 +61,7 @@ const Learn = () => {
               <div className="glass-card px-4 py-2 rounded-lg">
                 <div className="flex items-center">
                   <span className="text-ocean-deep font-semibold mr-2">Level 5</span>
-                  <Progress 
+                  <CustomProgress 
                     value={240} 
                     max={500} 
                     showValue 

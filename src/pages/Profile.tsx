@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
-import Progress from '@/components/ui/Progress';
+import CustomProgress from '@/components/ui/CustomProgress';
 import { User, Trophy, Calendar, Award, Target, Settings, Flag, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -98,7 +97,7 @@ const Profile = () => {
                       <span className="text-sm text-ocean-deep/70">Level {userStats.level}</span>
                       <span className="text-sm text-ocean-deep/70">{userStats.xp} XP</span>
                     </div>
-                    <Progress 
+                    <CustomProgress 
                       value={userStats.xp % 500} 
                       max={500} 
                       size="md" 
@@ -199,7 +198,7 @@ const Profile = () => {
                           </div>
                           
                           <div className="mt-3">
-                            <Progress 
+                            <CustomProgress 
                               value={achievement.progress} 
                               max={100}
                               size="sm"
@@ -227,7 +226,6 @@ const Profile = () => {
   );
 };
 
-// Add missing imports
 const BookOpen = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
