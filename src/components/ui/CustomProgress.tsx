@@ -42,17 +42,17 @@ const Progress = ({
   
   const getColor = () => {
     switch (color) {
-      case 'ocean': return 'bg-ocean';
-      case 'coral': return 'bg-coral';
-      case 'sand': return 'bg-sand';
-      default: return 'bg-primary';
+      case 'ocean': return 'bg-gradient-to-r from-ocean-light to-ocean-deep';
+      case 'coral': return 'bg-gradient-to-r from-coral-light to-coral-deep';
+      case 'sand': return 'bg-gradient-to-r from-sand-light to-sand-deep';
+      default: return 'bg-gradient-to-r from-primary to-ocean-deep';
     }
   };
   
   return (
     <div className={cn('w-full', className)}>
       <div className={cn(
-        'w-full bg-secondary rounded-full overflow-hidden',
+        'w-full bg-secondary/60 rounded-full overflow-hidden shadow-inner',
         getHeight()
       )}>
         <div
@@ -65,9 +65,9 @@ const Progress = ({
         >
           {animated && (
             <div className="absolute inset-0 overflow-hidden">
-              <div className="animate-[wave_2s_linear_infinite] absolute inset-0 opacity-20 bg-white" 
+              <div className="animate-[wave_2s_linear_infinite] absolute inset-0 opacity-30 bg-white" 
                 style={{
-                  backgroundImage: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)',
+                  backgroundImage: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)',
                   backgroundSize: '200% 100%'
                 }}
               />
@@ -75,7 +75,7 @@ const Progress = ({
           )}
           
           {showValue && size === 'lg' && (
-            <div className="h-full flex items-center justify-center text-xs font-semibold text-white">
+            <div className="h-full flex items-center justify-center text-xs font-semibold text-white drop-shadow-md">
               {Math.round(progress)}%
             </div>
           )}
@@ -83,7 +83,7 @@ const Progress = ({
       </div>
       
       {showValue && size !== 'lg' && (
-        <div className="mt-1 text-xs text-muted-foreground text-right">
+        <div className="mt-1 text-xs text-ocean-deep/90 font-medium text-right">
           {value} / {max}
         </div>
       )}

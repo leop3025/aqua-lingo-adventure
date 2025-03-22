@@ -66,17 +66,37 @@ export default {
 				ocean: {
 					light: '#D3E4FD',
 					DEFAULT: '#0EA5E9',
-					deep: '#075985'
+					deep: '#075985',
+					ultraLight: '#F0F7FF',
+					medium: '#38BDF8',
+					darkest: '#0C4A6E'
 				},
 				coral: {
 					light: '#FEF2F2',
 					DEFAULT: '#FB7185',
-					deep: '#BE123C'
+					deep: '#BE123C',
+					ultraLight: '#FFF1F2'
 				},
 				sand: {
 					light: '#FEF9C3',
 					DEFAULT: '#FDE047',
-					deep: '#CA8A04'
+					deep: '#CA8A04',
+					ultraLight: '#FEFCE8'
+				},
+				azure: {
+					light: '#E0F2FE',
+					DEFAULT: '#7DD3FC',
+					deep: '#0369A1'
+				},
+				cerulean: {
+					light: '#DBEAFE',
+					DEFAULT: '#3B82F6',
+					deep: '#1E40AF'
+				},
+				indigo: {
+					light: '#E0E7FF',
+					DEFAULT: '#6366F1',
+					deep: '#4338CA'
 				}
 			},
 			borderRadius: {
@@ -132,12 +152,18 @@ export default {
 			},
 			backgroundImage: {
 				'ocean-gradient': 'linear-gradient(180deg, #E0F2FE 0%, #0EA5E9 100%)',
+				'azure-gradient': 'linear-gradient(180deg, #E0F2FE 0%, #7DD3FC 100%)',
+				'cerulean-gradient': 'linear-gradient(180deg, #DBEAFE 0%, #3B82F6 100%)',
+				'ocean-radial': 'radial-gradient(circle at 50% 50%, #0EA5E9 0%, #075985 100%)',
 				'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
-				'underwater-light': 'radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.3) 0%, transparent 70%)'
+				'underwater-light': 'radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.3) 0%, transparent 70%)',
+				'blue-wave': 'linear-gradient(90deg, #D3E4FD 0%, #0EA5E9 50%, #075985 100%)'
 			},
 			boxShadow: {
 				'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
-				'neon': '0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3)'
+				'neon': '0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3)',
+				'elegant': '0 10px 25px -5px rgba(7, 89, 133, 0.1), 0 8px 10px -6px rgba(7, 89, 133, 0.1)',
+				'depth': '0 10px 15px -3px rgba(7, 89, 133, 0.2), 0 4px 6px -4px rgba(7, 89, 133, 0.2)'
 			},
 			typography: {
 				DEFAULT: {
