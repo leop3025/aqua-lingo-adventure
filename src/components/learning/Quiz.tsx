@@ -2,14 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Check, X, ChevronRight, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-type QuizQuestion = {
-  id: number;
-  question: string;
-  options: string[];
-  correctAnswer: number;
-  hint?: string;
-};
+import { QuizQuestion } from '@/types/learning';
 
 type QuizProps = {
   questions: QuizQuestion[];

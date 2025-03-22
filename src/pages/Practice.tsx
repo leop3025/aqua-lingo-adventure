@@ -1,100 +1,40 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Quiz from '@/components/learning/Quiz';
 import Confetti from '@/components/ui/Confetti';
 import { Gamepad2, MessageSquare, BookOpen, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-// Sample quiz questions
-const quizQuestions = [
-  {
-    id: 1,
-    question: "¿Cómo estás?",
-    options: ["How old are you?", "How are you?", "What's your name?", "Where are you from?"],
-    correctAnswer: 1,
-    hint: "This is a common greeting asking about someone's state or condition."
-  },
-  {
-    id: 2,
-    question: "¿Cómo te llamas?",
-    options: ["What's your name?", "How old are you?", "Where do you live?", "What do you do?"],
-    correctAnswer: 0,
-    hint: "Think about introductions when you meet someone for the first time."
-  },
-  {
-    id: 3,
-    question: "What is the Spanish word for 'cat'?",
-    options: ["Perro", "Gato", "Pájaro", "Ratón"],
-    correctAnswer: 1,
-    hint: "This animal is known for purring and chasing mice."
-  },
-  {
-    id: 4,
-    question: "Translate: 'I like to read books'",
-    options: ["Me gusta leer libros", "Quiero escribir libros", "Tengo muchos libros", "Voy a la biblioteca"],
-    correctAnswer: 0,
-    hint: "Focus on the verb 'gustar' (to like) and 'leer' (to read)."
-  },
-  {
-    id: 5,
-    question: "Which is the correct way to say 'good night' in Spanish?",
-    options: ["Buenos días", "Buenas tardes", "Buenas noches", "Buen provecho"],
-    correctAnswer: 2,
-    hint: "Think about what you say before going to bed."
-  }
-];
-
-// Game/activity data
-const activities = [
-  {
-    title: "Vocabulary Match",
-    description: "Match Spanish words with their English translations",
-    icon: <BookOpen className="h-8 w-8" />,
-    color: "bg-ocean-light",
-    borderColor: "border-ocean",
-    textColor: "text-ocean-deep"
-  },
-  {
-    title: "Conversation Challenge",
-    description: "Practice dialogue with common phrases",
-    icon: <MessageSquare className="h-8 w-8" />,
-    color: "bg-coral-light",
-    borderColor: "border-coral",
-    textColor: "text-coral-deep"
-  },
-  {
-    title: "Memory Game",
-    description: "Test your memory with Spanish vocabulary",
-    icon: <Gamepad2 className="h-8 w-8" />,
-    color: "bg-sand-light",
-    borderColor: "border-sand",
-    textColor: "text-sand-deep"
-  },
-  {
-    title: "Listening Challenge",
-    description: "Understand spoken Spanish and select the correct meaning",
-    icon: <Target className="h-8 w-8" />,
-    color: "bg-primary/10",
-    borderColor: "border-primary",
-    textColor: "text-primary"
-  }
-];
+import { getActivities, getQuizQuestions, completeQuiz } from '@/services/learningService';
+import { Activity } from '@/types/learning';
 
 const Practice = () => {
+  const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState('games');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [quizQuestions, setQuizQuestions] = useState<any[]>([]);
   
   useEffect(() => {
     setLoaded(true);
+    setActivities(getActivities());
+    setQuizQuestions(getQuizQuestions());
   }, []);
   
   const handleQuizComplete = (score: number) => {
+    // Save quiz results
+    completeQuiz(score, quizQuestions.length);
+    
     if (score >= 3) {
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 4000);
     }
+  };
+
+  const handleActivityClick = (activityId: string) => {
+    navigate(`/practice/activity/${activityId}`);
   };
   
   return (
@@ -156,13 +96,17 @@ const Practice = () => {
                     "transform transition-transform hover:scale-[1.02] active:scale-[0.98]"
                   )}
                   style={{ animationDelay: `${index * 100}ms` }}
+                  onClick={() => handleActivityClick(activity.id)}
                 >
                   <div className="flex items-start">
                     <div className={cn(
                       "p-3 rounded-lg mr-4",
                       activity.color
                     )}>
-                      {activity.icon}
+                      {activity.icon === "BookOpen" && <BookOpen className="h-8 w-8" />}
+                      {activity.icon === "MessageSquare" && <MessageSquare className="h-8 w-8" />}
+                      {activity.icon === "Gamepad2" && <Gamepad2 className="h-8 w-8" />}
+                      {activity.icon === "Target" && <Target className="h-8 w-8" />}
                     </div>
                     <div>
                       <h3 className={cn(

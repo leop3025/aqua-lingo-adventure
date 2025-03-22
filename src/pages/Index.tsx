@@ -1,12 +1,15 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Hero from '@/components/home/Hero';
 import Features from '@/components/home/Features';
 import { ChevronUp, Heart, MessageCircle, Mail, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { toast } from '@/components/ui/use-toast';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -23,6 +26,17 @@ const Index = () => {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handleSocialClick = (platform: string) => {
+    toast({
+      title: "Coming Soon",
+      description: `Follow us on ${platform} for updates and language tips!`,
+    });
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -60,30 +74,44 @@ const Index = () => {
               </p>
               
               <div className="mt-6 flex items-center space-x-4">
-                <a href="#" className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition">
+                <button 
+                  className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition"
+                  onClick={() => handleSocialClick("Twitter")}
+                >
                   <Heart className="h-5 w-5" />
-                </a>
-                <a href="#" className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition">
+                </button>
+                <button 
+                  className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition"
+                  onClick={() => handleSocialClick("Discord")}
+                >
                   <MessageCircle className="h-5 w-5" />
-                </a>
-                <a href="#" className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition">
+                </button>
+                <button 
+                  className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition"
+                  onClick={() => handleSocialClick("Email")}
+                >
                   <Mail className="h-5 w-5" />
-                </a>
+                </button>
               </div>
             </div>
             
             <div>
               <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
               <ul className="space-y-3">
-                {['Home', 'Learn', 'Practice', 'Profile'].map(link => (
-                  <li key={link}>
-                    <a 
-                      href={link === 'Home' ? '/' : `/${link.toLowerCase()}`} 
+                {[
+                  { name: 'Home', path: '/' },
+                  { name: 'Learn', path: '/learn' },
+                  { name: 'Practice', path: '/practice' },
+                  { name: 'Profile', path: '/profile' }
+                ].map(link => (
+                  <li key={link.name}>
+                    <button 
+                      onClick={() => handleNavigation(link.path)}
                       className="text-white/80 hover:text-white transition flex items-center"
                     >
                       <span className="mr-2">🔹</span>
-                      {link}
-                    </a>
+                      {link.name}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -99,10 +127,16 @@ const Index = () => {
                   { label: 'Privacy Policy', icon: '🔒' }
                 ].map(item => (
                   <li key={item.label}>
-                    <a href="#" className="text-white/80 hover:text-white transition flex items-center">
+                    <button 
+                      className="text-white/80 hover:text-white transition flex items-center"
+                      onClick={() => toast({
+                        title: "Coming Soon",
+                        description: `Our ${item.label} page is under construction.`
+                      })}
+                    >
                       <span className="mr-2">{item.icon}</span>
                       {item.label}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -114,15 +148,15 @@ const Index = () => {
               &copy; {new Date().getFullYear()} Learning with Lumi. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 flex flex-wrap gap-4">
-              <a href="#" className="text-white/60 hover:text-white transition text-sm flex items-center">
+              <button className="text-white/60 hover:text-white transition text-sm flex items-center">
                 Terms <ExternalLink className="ml-1 h-3 w-3" />
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition text-sm flex items-center">
+              </button>
+              <button className="text-white/60 hover:text-white transition text-sm flex items-center">
                 Privacy <ExternalLink className="ml-1 h-3 w-3" />
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition text-sm flex items-center">
+              </button>
+              <button className="text-white/60 hover:text-white transition text-sm flex items-center">
                 Cookies <ExternalLink className="ml-1 h-3 w-3" />
-              </a>
+              </button>
             </div>
           </div>
         </div>

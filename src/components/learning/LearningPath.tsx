@@ -1,96 +1,40 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronRight, Check, Lock, Star } from 'lucide-react';
 import LessonCard from './LessonCard';
 import { cn } from '@/lib/utils';
-
-// Sample lesson data
-const lessons = [
-  {
-    id: 1,
-    title: "Greetings & Introductions",
-    description: "Learn basic Spanish greetings and how to introduce yourself.",
-    difficulty: "Beginner",
-    complete: true,
-    unlocked: true,
-    progress: 100,
-    xp: 30,
-    icon: "👋"
-  },
-  {
-    id: 2,
-    title: "Basic Conversations",
-    description: "Practice everyday conversations in Spanish.",
-    difficulty: "Beginner",
-    complete: true,
-    unlocked: true,
-    progress: 100,
-    xp: 35,
-    icon: "💬"
-  },
-  {
-    id: 3,
-    title: "Numbers & Counting",
-    description: "Learn numbers and how to count in Spanish.",
-    difficulty: "Beginner",
-    complete: false,
-    unlocked: true,
-    progress: 60,
-    xp: 40,
-    icon: "🔢"
-  },
-  {
-    id: 4,
-    title: "Food & Dining",
-    description: "Learn vocabulary related to food and dining out.",
-    difficulty: "Beginner",
-    complete: false,
-    unlocked: true,
-    progress: 25,
-    xp: 45,
-    icon: "🍽️"
-  },
-  {
-    id: 5,
-    title: "Family & Relationships",
-    description: "Learn vocabulary for family members and relationships.",
-    difficulty: "Intermediate",
-    complete: false,
-    unlocked: false,
-    progress: 0,
-    xp: 50,
-    icon: "👪"
-  },
-  {
-    id: 6,
-    title: "Travel & Directions",
-    description: "Navigate and ask for directions in Spanish.",
-    difficulty: "Intermediate",
-    complete: false,
-    unlocked: false,
-    progress: 0,
-    xp: 55,
-    icon: "🧭"
-  }
-];
+import { getLessons } from '@/services/learningService';
+import { Lesson } from '@/types/learning';
 
 const LearningPath = () => {
+  const navigate = useNavigate();
   const [activeLessonId, setActiveLessonId] = useState<number | null>(null);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    // Get lessons from the learning service
+    const lessonData = getLessons();
+    setLessons(lessonData);
+    
     // Find the first incomplete lesson
-    const incompleteLesson = lessons.find(lesson => !lesson.complete && lesson.unlocked);
+    const incompleteLesson = lessonData.find(lesson => !lesson.complete && lesson.unlocked);
     if (incompleteLesson) {
       setActiveLessonId(incompleteLesson.id);
     } else {
-      setActiveLessonId(lessons[0].id);
+      setActiveLessonId(lessonData[0].id);
     }
     
     setLoaded(true);
   }, []);
 
-  const getStatusIcon = (lesson: typeof lessons[0]) => {
+  const handleLessonClick = (lessonId: number) => {
+    setActiveLessonId(lessonId);
+    navigate(`/learn/lesson/${lessonId}`);
+  };
+
+  const getStatusIcon = (lesson: Lesson) => {
     if (lesson.complete) {
       return <Check className="h-5 w-5 text-white" />;
     }
@@ -100,7 +44,7 @@ const LearningPath = () => {
     return <ChevronRight className="h-5 w-5 text-white" />;
   };
 
-  const getBgColor = (lesson: typeof lessons[0]) => {
+  const getBgColor = (lesson: Lesson) => {
     if (lesson.complete) return "bg-ocean";
     if (!lesson.unlocked) return "bg-muted-foreground/40";
     return "bg-primary";
@@ -141,7 +85,7 @@ const LearningPath = () => {
                     isActive={activeLessonId === lesson.id}
                     onClick={() => {
                       if (lesson.unlocked) {
-                        setActiveLessonId(lesson.id);
+                        handleLessonClick(lesson.id);
                       }
                     }}
                   />
