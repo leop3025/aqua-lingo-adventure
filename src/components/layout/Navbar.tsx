@@ -1,13 +1,14 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, Book, Play, User, Crown } from 'lucide-react';
+import { Menu, X, Home, Book, Play, User, Crown, Bell, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const [bellHovered, setBellHovered] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +48,7 @@ const Navbar = () => {
           <img 
             src="/lumi.png" 
             alt="Lumi mascot" 
-            className="h-10 w-10 object-contain animate-float" 
+            className="h-12 w-12 object-contain animate-float" 
           />
           <span className="font-bold text-xl md:text-2xl tracking-tight text-ocean-deep">
             Learning with Lumi
@@ -73,22 +74,52 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Streak Counter - Desktop */}
-        <div className="hidden md:flex items-center space-x-1">
-          <div className="bg-sand-deep/90 text-white px-3 py-1 rounded-full flex items-center">
+        {/* Desktop Right Menu */}
+        <div className="hidden md:flex items-center space-x-3">
+          {/* Notification Bell */}
+          <div 
+            className="relative p-2 rounded-full hover:bg-secondary cursor-pointer transition-all"
+            onMouseEnter={() => setBellHovered(true)}
+            onMouseLeave={() => setBellHovered(false)}
+          >
+            <Bell className="h-5 w-5 text-ocean-deep" />
+            <span className="absolute top-1 right-1 bg-coral w-2 h-2 rounded-full"></span>
+            {bellHovered && (
+              <span className="absolute top-full right-0 mt-2 w-56 p-3 bg-white rounded-xl shadow-lg text-sm text-ocean-deep z-50 animate-fade-in-up">
+                <div className="font-medium mb-1">🎉 New lesson unlocked!</div>
+                <div className="text-xs text-ocean-deep/70">Check out "Food & Dining" in your learning path</div>
+              </span>
+            )}
+          </div>
+          
+          {/* Streak Counter */}
+          <div className="bg-sand-deep/90 text-white px-3 py-1.5 rounded-full flex items-center">
             <Crown className="h-4 w-4 mr-1 text-sand" />
             <span className="font-medium">3</span>
+          </div>
+          
+          {/* Avatar */}
+          <div className="ml-2 w-9 h-9 rounded-full bg-primary/10 overflow-hidden flex items-center justify-center border-2 border-primary/30">
+            <div className="text-lg">👤</div>
           </div>
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-ocean-deep" 
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          {/* Mobile Streak */}
+          <div className="bg-sand-deep/90 text-white px-2 py-1 rounded-full flex items-center">
+            <Crown className="h-3 w-3 mr-0.5 text-sand" />
+            <span className="font-medium text-sm">3</span>
+          </div>
+          
+          <button 
+            className="text-ocean-deep bg-secondary/80 p-2 rounded-full" 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -96,30 +127,47 @@ const Navbar = () => {
         "fixed inset-0 top-16 bg-background backdrop-blur-lg md:hidden transition-transform duration-300 ease-in-out z-40",
         isOpen ? "translate-x-0" : "translate-x-full"
       )}>
-        <div className="flex flex-col p-4 space-y-4">
+        <div className="flex flex-col p-4 space-y-2">
           {links.map(link => (
             <Link
               key={link.path}
               to={link.path}
               className={cn(
-                "flex items-center px-4 py-3 rounded-lg transition-all",
+                "flex items-center px-4 py-3 rounded-xl transition-all",
                 location.pathname === link.path 
                   ? "bg-primary text-primary-foreground" 
-                  : "hover:bg-secondary"
+                  : "bg-white/50 hover:bg-secondary"
               )}
               onClick={closeMenu}
             >
               {link.icon}
               <span className="ml-3 text-lg">{link.label}</span>
+              {link.path === '/learn' && (
+                <div className="ml-auto bg-coral/80 text-white text-xs px-2 py-0.5 rounded-full flex items-center">
+                  <Sparkles className="h-3 w-3 mr-1" /> New
+                </div>
+              )}
             </Link>
           ))}
 
           {/* Streak Counter - Mobile */}
-          <div className="flex items-center p-4">
+          <div className="flex items-center p-4 bg-white/50 rounded-xl mt-4">
             <div className="bg-sand-deep/90 text-white px-3 py-1 rounded-full flex items-center">
               <Crown className="h-4 w-4 mr-1 text-sand" />
               <span className="font-medium">3</span>
               <span className="ml-2 text-sm">day streak</span>
+            </div>
+            <div className="ml-auto text-2xl">🔥</div>
+          </div>
+          
+          {/* Profile Info - Mobile */}
+          <div className="flex items-center p-4 bg-white/50 rounded-xl">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border-2 border-primary/30 overflow-hidden">
+              <div className="text-2xl">👤</div>
+            </div>
+            <div className="ml-3">
+              <div className="font-medium">Guest User</div>
+              <div className="text-sm text-ocean-deep/70">Level 2 Explorer</div>
             </div>
           </div>
         </div>

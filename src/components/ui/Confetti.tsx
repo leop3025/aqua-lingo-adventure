@@ -58,18 +58,20 @@ const Confetti = ({ active, duration = 3000 }: ConfettiProps) => {
   
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-      <style jsx>{`
-        @keyframes confetti-fall {
-          0% { transform: translateY(-100%) rotate(0deg); }
-          100% { transform: translateY(100vh) rotate(360deg); }
-        }
-        
-        .confetti-piece {
-          position: absolute;
-          top: -20px;
-          animation: confetti-fall linear forwards;
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes confetti-fall {
+            0% { transform: translateY(-100%) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+          }
+          
+          .confetti-piece {
+            position: absolute;
+            top: -20px;
+            animation: confetti-fall linear forwards;
+          }
+        `}
+      </style>
       {pieces}
     </div>
   );
