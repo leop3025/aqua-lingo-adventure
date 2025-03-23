@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { getActivities, getVocabularyByCategory, markWordAsLearned, addUserXP } from '@/services/learningService';
 import { Activity, Word } from '@/types/learning';
 import { toast } from "sonner";
-import confetti from '@/components/ui/Confetti';
+import Confetti, { confettiController } from '@/components/ui/Confetti';
 
 const ActivityDetails = () => {
   const { activityId } = useParams();
@@ -19,6 +19,7 @@ const ActivityDetails = () => {
   const [matchedPairs, setMatchedPairs] = useState<Record<string, string>>({});
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   const [activityCompleted, setActivityCompleted] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     if (activityId) {
@@ -99,7 +100,8 @@ const ActivityDetails = () => {
       // Check if activity is complete
       if (Object.keys(newMatchedPairs).length === vocabularyWords.length) {
         setTimeout(() => {
-          confetti.start();
+          confettiController.start();
+          setShowConfetti(true);
           setActivityCompleted(true);
           addUserXP(25);
           toast.success("Activity Complete!", {
@@ -109,7 +111,8 @@ const ActivityDetails = () => {
         
         // Stop confetti after 3 seconds
         setTimeout(() => {
-          confetti.stop();
+          confettiController.stop();
+          setShowConfetti(false);
         }, 3000);
       }
     } else {
@@ -132,7 +135,8 @@ const ActivityDetails = () => {
     
     // For demo purposes, show activity completed
     setTimeout(() => {
-      confetti.start();
+      confettiController.start();
+      setShowConfetti(true);
       setActivityCompleted(true);
       addUserXP(30);
       toast.success("Conversation Completed!", {
@@ -141,7 +145,8 @@ const ActivityDetails = () => {
       
       // Stop confetti after 3 seconds
       setTimeout(() => {
-        confetti.stop();
+        confettiController.stop();
+        setShowConfetti(false);
       }, 3000);
     }, 1500);
   };
@@ -177,6 +182,7 @@ const ActivityDetails = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <Confetti active={showConfetti} duration={3000} />
       
       <main className="container mx-auto px-4 pt-24 pb-16">
         <div className={cn(
