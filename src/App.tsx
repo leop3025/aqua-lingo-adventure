@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import LessonDetails from "./pages/LessonDetails";
 import ActivityDetails from "./pages/ActivityDetails";
 import NotFound from "./pages/NotFound";
+import "./App.css";
 
 const queryClient = new QueryClient();
 

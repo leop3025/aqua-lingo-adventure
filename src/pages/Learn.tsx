@@ -28,26 +28,26 @@ const Learn = () => {
     {
       label: "Current Streak",
       value: `${userData.streak} days`,
-      icon: <Trophy className="h-5 w-5 text-sand-deep" />,
-      color: "bg-sand-light"
+      icon: <Trophy className="h-5 w-5 text-coral" />,
+      color: "bg-coral-light"
     },
     {
       label: "Words Learned",
       value: `${userData.wordsLearned}`,
-      icon: <BookOpen className="h-5 w-5 text-ocean" />,
-      color: "bg-ocean-light"
+      icon: <BookOpen className="h-5 w-5 text-aqua-medium" />,
+      color: "bg-aqua-lightest"
     },
     {
       label: "XP Earned",
       value: `${userData.xp.toLocaleString()}`,
-      icon: <Target className="h-5 w-5 text-coral" />,
-      color: "bg-coral-light"
+      icon: <Target className="h-5 w-5 text-teal" />,
+      color: "bg-teal-light"
     },
     {
       label: "Achievements",
       value: "8/30",
-      icon: <Award className="h-5 w-5 text-primary" />,
-      color: "bg-primary/10"
+      icon: <Award className="h-5 w-5 text-aqua" />,
+      color: "bg-aqua-light"
     }
   ] : [];
 
@@ -64,16 +64,16 @@ const Learn = () => {
             <>
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-ocean-deep mb-2">
+                  <h1 className="text-3xl md:text-4xl font-bold text-navy-deep mb-2">
                     ¡Hola, {userData.username}!
                   </h1>
-                  <p className="text-ocean-deep/70">Continue your Spanish learning journey</p>
+                  <p className="text-navy-deep/70">Continue your Spanish learning journey</p>
                 </div>
                 
                 <div className="mt-4 md:mt-0">
-                  <div className="glass-card px-4 py-2 rounded-lg">
+                  <div className="bg-white/70 backdrop-blur-md shadow-sm px-4 py-2 rounded-xl">
                     <div className="flex items-center">
-                      <span className="text-ocean-deep font-semibold mr-2">Level {userData.level}</span>
+                      <span className="text-navy-deep font-semibold mr-2">Level {userData.level}</span>
                       <CustomProgress 
                         value={userData.xp % 500} 
                         max={500} 
@@ -102,8 +102,8 @@ const Learn = () => {
                         {stat.icon}
                       </div>
                       <div>
-                        <p className="text-sm text-ocean-deep/70">{stat.label}</p>
-                        <p className="text-xl font-semibold text-ocean-deep">{stat.value}</p>
+                        <p className="text-sm text-navy-deep/70">{stat.label}</p>
+                        <p className="text-xl font-semibold text-navy-deep">{stat.value}</p>
                       </div>
                     </div>
                   </div>
@@ -112,8 +112,8 @@ const Learn = () => {
             </>
           )}
           
-          <div className="glass-card rounded-xl p-6 md:p-8">
-            <h2 className="text-2xl font-bold mb-4 text-ocean-deep">Your Learning Path</h2>
+          <div className="bg-white rounded-xl shadow-sm p-6 md:p-8">
+            <h2 className="text-2xl font-bold mb-4 text-navy-deep">Your Learning Path</h2>
             <LearningPath />
           </div>
         </section>

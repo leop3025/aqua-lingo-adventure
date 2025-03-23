@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,40 +62,32 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				ocean: {
-					light: '#D3E4FD',
-					DEFAULT: '#0EA5E9',
-					deep: '#075985',
-					ultraLight: '#F0F7FF',
-					medium: '#38BDF8',
-					darkest: '#0C4A6E'
+				aqua: {
+					lightest: '#E8F9FC',
+					light: '#B3ECF9',
+					DEFAULT: '#4DD9F0',
+					medium: '#00C2E0',
+					deep: '#0097B2',
+					darkest: '#006B7F'
 				},
 				coral: {
-					light: '#FEF2F2',
-					DEFAULT: '#FB7185',
-					deep: '#BE123C',
-					ultraLight: '#FFF1F2'
+					light: '#FFEDED',
+					DEFAULT: '#FF7D85',
+					deep: '#FF4F59'
 				},
-				sand: {
-					light: '#FEF9C3',
-					DEFAULT: '#FDE047',
-					deep: '#CA8A04',
-					ultraLight: '#FEFCE8'
+				teal: {
+					light: '#E0F5F5',
+					DEFAULT: '#72D2D2',
+					deep: '#40B3B3'
 				},
-				azure: {
-					light: '#E0F2FE',
-					DEFAULT: '#7DD3FC',
-					deep: '#0369A1'
+				navy: {
+					light: '#E5E9F0',
+					DEFAULT: '#1E3A5F',
+					deep: '#0F1E33'
 				},
-				cerulean: {
-					light: '#DBEAFE',
-					DEFAULT: '#3B82F6',
-					deep: '#1E40AF'
-				},
-				indigo: {
-					light: '#E0E7FF',
-					DEFAULT: '#6366F1',
-					deep: '#4338CA'
+				lumi: {
+					pink: '#FF8FAB',
+					light: '#FFC2D1'
 				}
 			},
 			borderRadius: {
@@ -151,19 +142,16 @@ export default {
 				'rotate-slow': 'rotate-slow 10s linear infinite'
 			},
 			backgroundImage: {
-				'ocean-gradient': 'linear-gradient(180deg, #E0F2FE 0%, #0EA5E9 100%)',
-				'azure-gradient': 'linear-gradient(180deg, #E0F2FE 0%, #7DD3FC 100%)',
-				'cerulean-gradient': 'linear-gradient(180deg, #DBEAFE 0%, #3B82F6 100%)',
-				'ocean-radial': 'radial-gradient(circle at 50% 50%, #0EA5E9 0%, #075985 100%)',
+				'aqua-gradient': 'linear-gradient(180deg, #E8F9FC 0%, #4DD9F0 100%)',
+				'aqua-light-gradient': 'linear-gradient(180deg, #F0FCFF 0%, #B3ECF9 100%)',
 				'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
-				'underwater-light': 'radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.3) 0%, transparent 70%)',
-				'blue-wave': 'linear-gradient(90deg, #D3E4FD 0%, #0EA5E9 50%, #075985 100%)'
+				'underwater-light': 'radial-gradient(circle at 50% 0%, rgba(0, 194, 224, 0.3) 0%, transparent 70%)',
 			},
 			boxShadow: {
 				'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
-				'neon': '0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3)',
-				'elegant': '0 10px 25px -5px rgba(7, 89, 133, 0.1), 0 8px 10px -6px rgba(7, 89, 133, 0.1)',
-				'depth': '0 10px 15px -3px rgba(7, 89, 133, 0.2), 0 4px 6px -4px rgba(7, 89, 133, 0.2)'
+				'aqua': '0 0 10px rgba(77, 217, 240, 0.5), 0 0 20px rgba(77, 217, 240, 0.3)',
+				'elegant': '0 10px 25px -5px rgba(15, 30, 51, 0.1), 0 8px 10px -6px rgba(15, 30, 51, 0.1)',
+				'depth': '0 10px 15px -3px rgba(15, 30, 51, 0.2), 0 4px 6px -4px rgba(15, 30, 51, 0.2)'
 			},
 			typography: {
 				DEFAULT: {

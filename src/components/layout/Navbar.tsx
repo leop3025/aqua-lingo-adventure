@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, Book, Play, User, Crown, Bell, Sparkles } from 'lucide-react';
+import { Menu, X, Home, Book, Play, User, Crown, Bell } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
     <nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 py-3 md:px-8",
-        scrolled ? "glass-card shadow-md backdrop-blur-lg" : "bg-transparent"
+        scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -45,27 +45,29 @@ const Navbar = () => {
           className="flex items-center space-x-2"
           onClick={closeMenu}
         >
-          <img 
-            src="/lovable-uploads/51785a16-8be3-4d70-ad98-532fb4ed9105.png" 
-            alt="Lumi mascot" 
-            className="h-12 w-12 object-contain animate-float" 
-          />
-          <span className="font-bold text-xl md:text-2xl tracking-tight text-ocean-deep">
-            Learning with Lumi
+          <div className="rounded-full bg-lumi-pink w-10 h-10 flex items-center justify-center">
+            <img 
+              src="/lovable-uploads/844eae2a-50a8-472a-bab4-19ab855d4155.png" 
+              alt="Lumi mascot" 
+              className="h-9 w-9 object-contain" 
+            />
+          </div>
+          <span className="font-bold text-xl tracking-tight text-lumi-pink">
+            Learning with <span className="text-aqua-medium">Lumi</span>
           </span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-1">
+        <div className="hidden md:flex bg-white/80 backdrop-blur-md shadow-sm rounded-full px-1 py-1">
           {links.map(link => (
             <Link
               key={link.path}
               to={link.path}
               className={cn(
-                "flex items-center px-4 py-2 rounded-full transition-all duration-300",
+                "flex items-center px-6 py-2 rounded-full transition-all duration-300",
                 location.pathname === link.path 
-                  ? "bg-primary text-primary-foreground" 
-                  : "hover:bg-secondary"
+                  ? "bg-aqua text-white" 
+                  : "hover:bg-aqua-lightest"
               )}
             >
               {link.icon}
@@ -76,30 +78,15 @@ const Navbar = () => {
 
         {/* Desktop Right Menu */}
         <div className="hidden md:flex items-center space-x-3">
-          {/* Notification Bell */}
-          <div 
-            className="relative p-2 rounded-full hover:bg-secondary cursor-pointer transition-all"
-            onMouseEnter={() => setBellHovered(true)}
-            onMouseLeave={() => setBellHovered(false)}
-          >
-            <Bell className="h-5 w-5 text-ocean-deep" />
-            <span className="absolute top-1 right-1 bg-coral w-2 h-2 rounded-full"></span>
-            {bellHovered && (
-              <span className="absolute top-full right-0 mt-2 w-56 p-3 bg-white rounded-xl shadow-lg text-sm text-ocean-deep z-50 animate-fade-in-up">
-                <div className="font-medium mb-1">🎉 New lesson unlocked!</div>
-                <div className="text-xs text-ocean-deep/70">Check out "Food & Dining" in your learning path</div>
-              </span>
-            )}
-          </div>
-          
           {/* Streak Counter */}
-          <div className="bg-sand-deep/90 text-white px-3 py-1.5 rounded-full flex items-center">
-            <Crown className="h-4 w-4 mr-1 text-sand" />
+          <div className="bg-coral/90 text-white px-3 py-1.5 rounded-full flex items-center">
+            <Crown className="h-4 w-4 mr-1 text-white" />
             <span className="font-medium">3</span>
+            <span className="ml-1">day streak</span>
           </div>
           
           {/* Avatar */}
-          <div className="ml-2 w-9 h-9 rounded-full bg-primary/10 overflow-hidden flex items-center justify-center border-2 border-primary/30">
+          <div className="ml-2 w-9 h-9 rounded-full bg-aqua-light overflow-hidden flex items-center justify-center border-2 border-white">
             <div className="text-lg">👤</div>
           </div>
         </div>
@@ -107,13 +94,13 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-3">
           {/* Mobile Streak */}
-          <div className="bg-sand-deep/90 text-white px-2 py-1 rounded-full flex items-center">
-            <Crown className="h-3 w-3 mr-0.5 text-sand" />
+          <div className="bg-coral/90 text-white px-2 py-1 rounded-full flex items-center">
+            <Crown className="h-3 w-3 mr-0.5 text-white" />
             <span className="font-medium text-sm">3</span>
           </div>
           
           <button 
-            className="text-ocean-deep bg-secondary/80 p-2 rounded-full" 
+            className="text-navy-deep bg-white/80 p-2 rounded-full shadow-sm" 
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -124,7 +111,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div className={cn(
-        "fixed inset-0 top-16 bg-background backdrop-blur-lg md:hidden transition-transform duration-300 ease-in-out z-40",
+        "fixed inset-0 top-16 bg-white/95 backdrop-blur-lg md:hidden transition-transform duration-300 ease-in-out z-40",
         isOpen ? "translate-x-0" : "translate-x-full"
       )}>
         <div className="flex flex-col p-4 space-y-2">
@@ -135,25 +122,20 @@ const Navbar = () => {
               className={cn(
                 "flex items-center px-4 py-3 rounded-xl transition-all",
                 location.pathname === link.path 
-                  ? "bg-primary text-primary-foreground" 
-                  : "bg-white/50 hover:bg-secondary"
+                  ? "bg-aqua text-white" 
+                  : "bg-white/50 hover:bg-aqua-lightest"
               )}
               onClick={closeMenu}
             >
               {link.icon}
               <span className="ml-3 text-lg">{link.label}</span>
-              {link.path === '/learn' && (
-                <div className="ml-auto bg-coral/80 text-white text-xs px-2 py-0.5 rounded-full flex items-center">
-                  <Sparkles className="h-3 w-3 mr-1" /> New
-                </div>
-              )}
             </Link>
           ))}
 
           {/* Streak Counter - Mobile */}
           <div className="flex items-center p-4 bg-white/50 rounded-xl mt-4">
-            <div className="bg-sand-deep/90 text-white px-3 py-1 rounded-full flex items-center">
-              <Crown className="h-4 w-4 mr-1 text-sand" />
+            <div className="bg-coral/90 text-white px-3 py-1 rounded-full flex items-center">
+              <Crown className="h-4 w-4 mr-1 text-white" />
               <span className="font-medium">3</span>
               <span className="ml-2 text-sm">day streak</span>
             </div>
@@ -162,12 +144,12 @@ const Navbar = () => {
           
           {/* Profile Info - Mobile */}
           <div className="flex items-center p-4 bg-white/50 rounded-xl">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border-2 border-primary/30 overflow-hidden">
+            <div className="w-12 h-12 rounded-full bg-aqua-light flex items-center justify-center border-2 border-white overflow-hidden">
               <div className="text-2xl">👤</div>
             </div>
             <div className="ml-3">
               <div className="font-medium">Guest User</div>
-              <div className="text-sm text-ocean-deep/70">Level 2 Explorer</div>
+              <div className="text-sm text-navy-deep/70">Level 2 Explorer</div>
             </div>
           </div>
         </div>

@@ -48,7 +48,7 @@ const Index = () => {
         <Features />
       </main>
       
-      <footer className="bg-ocean-deep text-white py-12 rounded-t-3xl relative overflow-hidden">
+      <footer className="bg-navy-deep text-white py-12 rounded-t-3xl relative overflow-hidden">
         {/* Underwater bubbles in footer */}
         {[...Array(8)].map((_, i) => (
           <div 
@@ -66,7 +66,13 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <img src="/lovable-uploads/51785a16-8be3-4d70-ad98-532fb4ed9105.png" alt="Lumi mascot" className="h-12 w-12 object-contain animate-pulse-slow" />
+                <div className="bg-lumi-pink w-10 h-10 rounded-full flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/844eae2a-50a8-472a-bab4-19ab855d4155.png" 
+                    alt="Lumi mascot" 
+                    className="h-8 w-8 object-contain" 
+                  />
+                </div>
                 <span className="font-bold text-xl tracking-tight">Learning with Lumi</span>
               </div>
               <p className="text-white/80 max-w-md">
@@ -109,7 +115,7 @@ const Index = () => {
                       onClick={() => handleNavigation(link.path)}
                       className="text-white/80 hover:text-white transition flex items-center"
                     >
-                      <span className="mr-2">🔹</span>
+                      <span className="mr-2 text-aqua">→</span>
                       {link.name}
                     </button>
                   </li>
@@ -166,7 +172,7 @@ const Index = () => {
       <button
         onClick={scrollToTop}
         className={cn(
-          "fixed bottom-6 right-6 p-4 rounded-full bg-primary text-white shadow-lg z-40 transition-all duration-300 transform hover:scale-110",
+          "fixed bottom-6 right-6 p-3 rounded-full bg-aqua text-white shadow-md z-40 transition-all duration-300 transform hover:scale-110",
           showScrollTop ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
         )}
         aria-label="Scroll to top"

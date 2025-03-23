@@ -1,125 +1,102 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 204 100% 97%;
-    --foreground: 210 40% 20%;
+    --background: 190 100% 95%;
+    --foreground: 192 80% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 40% 20%;
+    --card-foreground: 192 80% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 40% 20%;
+    --popover-foreground: 192 80% 10%;
 
-    --primary: 196 100% 47%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 189 75% 53%;
+    --primary-foreground: 190 100% 98%;
 
-    --secondary: 200 90% 95%;
-    --secondary-foreground: 210 40% 20%;
+    --secondary: 190 90% 95%;
+    --secondary-foreground: 192 80% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 20% 65.1%;
+    --muted: 190 40% 96.1%;
+    --muted-foreground: 190 20% 40%;
 
-    --accent: 196 100% 47%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 189 75% 53%;
+    --accent-foreground: 190 100% 98%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 190 100% 98%;
 
-    --border: 210 30% 91.4%;
-    --input: 210 30% 91.4%;
-    --ring: 196 100% 47%;
+    --border: 190 30% 91.4%;
+    --input: 190 30% 91.4%;
+    --ring: 189 75% 53%;
 
-    --radius: 1.25rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 200 100% 97%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 190 100% 97%;
+    --sidebar-foreground: 192 80% 10%;
+    --sidebar-primary: 189 75% 53%;
+    --sidebar-primary-foreground: 190 100% 98%;
+    --sidebar-accent: 190 90% 95%;
+    --sidebar-accent-foreground: 192 80% 10%;
+    --sidebar-border: 190 30% 91.4%;
+    --sidebar-ring: 189 75% 53%;
   }
 
-  .dark {
-    --background: 210 50% 10%;
-    --foreground: 210 40% 98%;
-
-    --card: 210 50% 15%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 210 50% 15%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 196 80% 57%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 50% 20%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 210 50% 20%;
-    --muted-foreground: 215 20% 75%;
-
-    --accent: 196 80% 57%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 50.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 196 80% 57%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground overflow-x-hidden;
-    font-family: 'Fredoka', 'Inter', sans-serif;
-    background-image: radial-gradient(circle at 50% 50%, #F0F7FF 0%, rgba(216, 240, 253, 0.7) 50%, rgba(208, 235, 255, 0.5) 100%);
+    font-family: 'Quicksand', 'Nunito', sans-serif;
+    background-image: linear-gradient(180deg, #F0FCFF 0%, #E0F5FB 100%);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fredoka', sans-serif;
-    @apply text-ocean-deep;
+    font-family: 'Nunito', sans-serif;
+    @apply text-navy-deep;
   }
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-ocean-light/50 rounded-full;
+    @apply bg-aqua-lightest rounded-full;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-ocean/50 rounded-full transition-all;
+    @apply bg-aqua/50 rounded-full transition-all;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-ocean/80;
+    @apply bg-aqua/80;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-glass-gradient backdrop-blur-md border border-white/40 shadow-elegant rounded-2xl;
+    @apply bg-white/60 backdrop-blur-md border border-white/80 shadow-elegant rounded-2xl;
+  }
+
+  .aqua-card {
+    @apply bg-gradient-to-b from-white/80 to-aqua-lightest border border-aqua-light/30 shadow-elegant rounded-2xl;
   }
 
   .glass-button {
-    @apply glass-card hover:shadow-neon transition-shadow duration-300 text-ocean-deep;
+    @apply bg-white/70 backdrop-blur-sm border border-white/80 hover:bg-white/90 hover:shadow-aqua transition-all duration-300 text-navy-deep rounded-full;
+  }
+
+  .primary-button {
+    @apply bg-aqua text-white hover:bg-aqua-medium transition-all duration-300 rounded-full font-medium;
   }
 
   .btn {
@@ -137,12 +114,7 @@
 
   .underwater-section {
     @apply relative overflow-hidden;
-    background-image: linear-gradient(180deg, #E0F2FE 0%, #0EA5E9 100%);
-  }
-
-  .underwater-section::before {
-    content: '';
-    @apply absolute top-0 left-0 right-0 bottom-0 bg-underwater-light opacity-60 pointer-events-none;
+    background-image: linear-gradient(180deg, #E8F9FC 0%, #4DD9F0 100%);
   }
 
   .bubble {
@@ -156,7 +128,7 @@
   .wave {
     @apply absolute bottom-0 left-0 w-[200%] min-w-[1000px] h-20 bg-repeat-x animate-wave opacity-30;
     background-size: 50% 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 88.7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-31.8z' fill='%23003F7C'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 88.7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-31.8z' fill='%234DD9F0'/%3E%3C/svg%3E");
   }
 
   .lesson-item {
@@ -165,7 +137,7 @@
 
   .lesson-item::after {
     content: '';
-    @apply absolute w-0.5 h-full bg-ocean/40 -z-10 left-5 top-10;
+    @apply absolute w-0.5 h-full bg-aqua/40 -z-10 left-5 top-10;
   }
 
   .lesson-item:last-child::after {
@@ -181,19 +153,23 @@
     @apply absolute bottom-0 animate-sway origin-bottom;
   }
 
-  /* Enhanced card styles */
-  .blue-card {
-    @apply bg-gradient-to-br from-ocean-ultraLight to-ocean-light border border-ocean/20 shadow-elegant;
-  }
-  
+  /* Card styles */
   .learning-card {
-    @apply bg-white/70 backdrop-blur-sm border border-ocean-light/50 shadow-depth hover:shadow-elegant transition-all duration-300 rounded-xl;
+    @apply bg-white/70 backdrop-blur-sm border border-aqua-light/30 shadow-depth hover:shadow-elegant transition-all duration-300 rounded-xl;
+  }
+
+  .pathway-card {
+    @apply bg-white/80 backdrop-blur-sm p-5 rounded-xl border border-aqua-lightest shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .icon-container {
+    @apply flex items-center justify-center w-12 h-12 rounded-full;
   }
 }
 
 /* Animated Gradient Background */
 .animated-gradient {
-  background: linear-gradient(-45deg, #0EA5E9, #06B6D4, #0284C7, #075985);
+  background: linear-gradient(-45deg, #4DD9F0, #00C2E0, #72D2D2, #B3ECF9);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -283,30 +259,4 @@
 
 .animate-bubble-rise {
   animation: bubble-rise 8s ease-in-out infinite;
-}
-
-/* Water Mask for Images */
-.water-mask {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23000' d='M42.8,-65.1C56.9,-60.3,70.8,-51.2,77.7,-38.1C84.5,-25,84.2,-7.9,79.9,7.2C75.5,22.4,67.1,35.5,56.7,46.5C46.3,57.4,34,66.2,19.9,71.2C5.9,76.3,-9.9,77.7,-25.5,74.8C-41.1,71.9,-56.5,64.7,-68.1,52.9C-79.7,41,-87.4,24.5,-88.6,7.3C-89.8,-9.9,-84.5,-28,-73.9,-40.5C-63.3,-53,-47.4,-60,-32.9,-64.7C-18.4,-69.4,-5.2,-71.7,6.9,-72.1C19,-72.4,28.8,-69.9,42.8,-65.1Z' transform='translate(100 100)'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23000' d='M42.8,-65.1C56.9,-60.3,70.8,-51.2,77.7,-38.1C84.5,-25,84.2,-7.9,79.9,7.2C75.5,22.4,67.1,35.5,56.7,46.5C46.3,57.4,34,66.2,19.9,71.2C5.9,76.3,-9.9,77.7,-25.5,74.8C-41.1,71.9,-56.5,64.7,-68.1,52.9C-79.7,41,-87.4,24.5,-88.6,7.3C-89.8,-9.9,-84.5,-28,-73.9,-40.5C-63.3,-53,-47.4,-60,-32.9,-64.7C-18.4,-69.4,-5.2,-71.7,6.9,-72.1C19,-72.4,28.8,-69.9,42.8,-65.1Z' transform='translate(100 100)'/%3E%3C/svg%3E");
-}
-
-/* Button Pop Animation */
-@keyframes button-pop {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.animate-button-pop {
-  animation: button-pop 0.3s ease-in-out;
-}
-
-/* Jellyfish Pulsing Animation */
-@keyframes pulse {
-  0%, 100% { transform: scale(0.95); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 1; }
-}
-
-.animate-pulse-slow {
-  animation: pulse 4s infinite ease-in-out;
 }

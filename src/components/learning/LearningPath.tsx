@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Check, Lock, Star } from 'lucide-react';
+import { ChevronRight, Check, Lock } from 'lucide-react';
 import LessonCard from './LessonCard';
 import { cn } from '@/lib/utils';
 import { getLessons } from '@/services/learningService';
@@ -45,15 +45,15 @@ const LearningPath = () => {
   };
 
   const getBgColor = (lesson: Lesson) => {
-    if (lesson.complete) return "bg-ocean";
+    if (lesson.complete) return "bg-teal";
     if (!lesson.unlocked) return "bg-muted-foreground/40";
-    return "bg-primary";
+    return "bg-aqua";
   };
 
   return (
     <div className="py-8">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-        Your Learning Adventure
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-navy-deep">
+        Your Learning Journey
       </h2>
 
       <div className="max-w-4xl mx-auto">

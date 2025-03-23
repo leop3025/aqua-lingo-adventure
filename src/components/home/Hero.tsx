@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Play, ChevronRight, Sparkles, PartyPopper } from 'lucide-react';
+import { ChevronRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Hero = () => {
@@ -12,7 +12,7 @@ const Hero = () => {
   }, []);
 
   // Generate random bubbles
-  const bubbles = Array.from({ length: 20 }, (_, i) => ({
+  const bubbles = Array.from({ length: 15 }, (_, i) => ({
     id: i,
     size: Math.random() * 3 + 1, // 1-4
     x: Math.random() * 100, // 0-100%
@@ -20,7 +20,7 @@ const Hero = () => {
   }));
 
   return (
-    <div className="underwater-section min-h-screen pt-24 pb-16 flex flex-col items-center justify-center relative animated-gradient overflow-hidden">
+    <div className="min-h-screen pt-24 pb-16 flex flex-col items-center justify-center relative overflow-hidden bg-aqua-light-gradient">
       {/* Animated bubbles */}
       {bubbles.map(bubble => (
         <div
@@ -34,21 +34,9 @@ const Hero = () => {
         />
       ))}
       
-      {/* Fish swimming across screen */}
-      <div className="fish top-1/4" style={{ animationDelay: '0s' }}>
-        <div className="text-4xl">🐠</div>
-      </div>
-      <div className="fish top-1/3" style={{ animationDelay: '5s' }}>
-        <div className="text-5xl">🐟</div>
-      </div>
-      <div className="fish bottom-1/4" style={{ animationDelay: '8s' }}>
-        <div className="text-3xl">🐡</div>
-      </div>
-      
-      {/* Seaweed decorations */}
-      <div className="seaweed left-10 h-32 text-4xl">🌿</div>
-      <div className="seaweed left-1/4 h-40 text-5xl" style={{ animationDelay: '0.5s' }}>🌿</div>
-      <div className="seaweed right-20 h-36 text-4xl" style={{ animationDelay: '1s' }}>🌿</div>
+      {/* Decorative fish */}
+      <div className="absolute bottom-20 right-10 text-5xl transform -rotate-12">🐡</div>
+      <div className="absolute top-40 left-10 text-3xl transform rotate-12">🐠</div>
       
       {/* Wave effect */}
       <div className="wave"></div>
@@ -60,47 +48,40 @@ const Hero = () => {
             "text-center lg:text-left lg:w-1/2 transition-all duration-700 transform",
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           )}>
-            <div className="inline-block mb-4 px-4 py-2 bg-ocean-light text-ocean-deep rounded-full flex items-center gap-2 shadow-md">
-              <Sparkles className="h-4 w-4" />
-              <span className="text-sm font-medium">¡Aprende español con Lumi!</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4 drop-shadow-md">
-              Dive Into Spanish Learning
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-navy-deep mb-4">
+              Dive into Spanish with <span className="text-aqua-medium">AquaLearn</span>
             </h1>
-            <p className="text-xl text-white/90 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Explore the depths of Spanish language with Lumi, your friendly underwater guide. Learn through fun, engaging lessons and games.
+            <p className="text-xl text-navy-deep/80 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              Learn Spanish in a fun, immersive underwater-themed experience. Master vocabulary, grammar, and pronunciation with interactive lessons and games.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 to="/learn"
-                className="btn px-6 py-4 bg-primary text-white rounded-full font-medium text-lg flex items-center justify-center hover:bg-primary/90 transition shadow-lg"
+                className="primary-button px-6 py-3 flex items-center justify-center text-lg shadow-md"
               >
+                <Book className="mr-2 h-5 w-5" />
                 Start Learning
-                <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 to="/practice"
-                className="glass-button px-6 py-4 rounded-full font-medium text-lg flex items-center justify-center"
+                className="glass-button px-6 py-3 flex items-center justify-center text-lg shadow-sm"
               >
-                Practice Games
-                <Play className="ml-2 h-5 w-5" />
+                <Gamepad className="mr-2 h-5 w-5" />
+                Quick Quiz
               </Link>
             </div>
-            <div className="mt-6 flex items-center justify-center lg:justify-start">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
-                    <img 
-                      src={`https://i.pravatar.cc/100?img=${i+10}`} 
-                      alt={`User ${i}`}
-                      className="w-full h-full object-cover" 
-                    />
-                  </div>
-                ))}
+            <div className="flex justify-center lg:justify-start mt-8 gap-12">
+              <div className="flex flex-col items-center">
+                <Star className="h-6 w-6 text-coral mb-1" />
+                <p className="font-medium">Fun, interactive lessons</p>
               </div>
-              <div className="ml-3 flex items-center">
-                <PartyPopper className="h-4 w-4 text-coral mr-1" />
-                <span className="text-white/80 text-sm">Join 1,000+ happy learners!</span>
+              <div className="flex flex-col items-center">
+                <Chart className="h-6 w-6 text-coral mb-1" />
+                <p className="font-medium">Track your progress</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <UserIcon className="h-6 w-6 text-coral mb-1" />
+                <p className="font-medium">Personalized learning</p>
               </div>
             </div>
           </div>
@@ -110,38 +91,107 @@ const Hero = () => {
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           )} style={{ transitionDelay: '200ms' }}>
             <div className="relative">
-              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full transform -translate-y-10"></div>
-              <img
-                src="/lovable-uploads/51785a16-8be3-4d70-ad98-532fb4ed9105.png"
-                alt="Lumi the friendly axolotl guide"
-                className="floating relative max-w-xs md:max-w-sm lg:max-w-md"
-                style={{ objectFit: 'contain', maxHeight: '400px' }}
-              />
+              <div className="absolute inset-0 bg-aqua/20 blur-3xl rounded-full transform -translate-y-10"></div>
+              <div className="bg-aqua-lightest rounded-full p-8 relative">
+                <img
+                  src="/lovable-uploads/844eae2a-50a8-472a-bab4-19ab855d4155.png"
+                  alt="Lumi the friendly mascot"
+                  className="floating relative max-w-xs md:max-w-sm"
+                  style={{ objectFit: 'contain', maxHeight: '300px' }}
+                />
+                <div className="absolute top-10 right-0 text-4xl animate-float" style={{ animationDelay: '1s' }}>🐙</div>
+                <div className="absolute bottom-10 left-0 text-3xl animate-float" style={{ animationDelay: '0.5s' }}>🦀</div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Quick stats */}
+        {/* Popular Pathways */}
         <div className={cn(
-          "grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 mx-auto max-w-4xl glass-card p-6 rounded-2xl transition-all duration-700",
+          "mt-20 transition-all duration-700",
           loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         )} style={{ transitionDelay: '400ms' }}>
-          {[
-            { label: "Free Lessons", value: "50+", icon: "📚" },
-            { label: "Fun Games", value: "12", icon: "🎮" },
-            { label: "Vocab Words", value: "1,000+", icon: "🔤" },
-            { label: "Daily Challenges", value: "7", icon: "🏆" }
-          ].map((stat, idx) => (
-            <div key={idx} className="text-center p-2 transform hover:scale-105 transition-transform">
-              <div className="text-3xl mb-2">{stat.icon}</div>
-              <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
-              <div className="text-sm text-white/80">{stat.label}</div>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-navy-deep">Popular Pathways</h2>
+            <Link to="/learn" className="text-aqua-medium font-medium flex items-center">
+              View all <ChevronRight className="h-4 w-4 ml-1" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="pathway-card">
+              <div className="flex items-start">
+                <div className="icon-container bg-aqua-lightest text-2xl mb-3">
+                  👋
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Beginner Basics</h3>
+              <p className="text-navy-deep/70">
+                Start with essential greetings and simple conversations
+              </p>
             </div>
-          ))}
+            
+            <div className="pathway-card">
+              <div className="flex items-start">
+                <div className="icon-container bg-aqua-lightest text-2xl mb-3">
+                  🍽️
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Food & Dining</h3>
+              <p className="text-navy-deep/70">
+                Learn to order food and navigate restaurants in Spanish
+              </p>
+            </div>
+            
+            <div className="pathway-card">
+              <div className="flex items-start">
+                <div className="icon-container bg-aqua-lightest text-2xl mb-3">
+                  💪
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Daily Practice</h3>
+              <p className="text-navy-deep/70">
+                Strengthen your skills with targeted daily exercises
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
+// Icons
+const Book = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+  </svg>
+);
+
+const Gamepad = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <line x1="6" x2="10" y1="12" y2="12"></line>
+    <line x1="8" x2="8" y1="10" y2="14"></line>
+    <line x1="15" x2="15.01" y1="13" y2="13"></line>
+    <line x1="18" x2="18.01" y1="11" y2="11"></line>
+    <rect width="20" height="12" x="2" y="6" rx="2"></rect>
+  </svg>
+);
+
+const Chart = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M3 3v18h18"></path>
+    <path d="M18 17V9"></path>
+    <path d="M13 17V5"></path>
+    <path d="M8 17v-3"></path>
+  </svg>
+);
+
+const UserIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+    <circle cx="12" cy="7" r="4"></circle>
+  </svg>
+);
 
 export default Hero;
