@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { getActivities } from '@/services/learningService';
 import { Activity } from '@/types/learning';
@@ -7,6 +7,7 @@ import Navbar from '@/components/layout/Navbar';
 import VocabularyCategories from '@/components/learning/VocabularyCategories';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, MessageSquare, Gamepad2, Target } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const iconMap = {
   BookOpen: <BookOpen className="h-5 w-5" />,
