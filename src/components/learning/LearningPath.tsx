@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronRight, Check, Lock } from 'lucide-react';
 import LessonCard from './LessonCard';
 import { cn } from '@/lib/utils';
-import { getLessons } from '@/services/learningService';
+import { getLessons, getUserData } from '@/services/learningService';
 import { Lesson } from '@/types/learning';
+import { toast } from "sonner";
 
 const LearningPath = () => {
   const navigate = useNavigate();
   const [activeLessonId, setActiveLessonId] = useState<number | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [userData, setUserData] = useState(getUserData());
 
   useEffect(() => {
     // Get lessons from the learning service
@@ -26,12 +28,22 @@ const LearningPath = () => {
       setActiveLessonId(lessonData[0].id);
     }
     
-    setLoaded(true);
+    // Add a small delay to create a nice loading animation
+    setTimeout(() => {
+      setLoaded(true);
+    }, 300);
   }, []);
 
-  const handleLessonClick = (lessonId: number) => {
-    setActiveLessonId(lessonId);
-    navigate(`/learn/lesson/${lessonId}`);
+  const handleLessonClick = (lesson: Lesson) => {
+    if (!lesson.unlocked) {
+      toast.error("This lesson is still locked", {
+        description: "Complete the previous lessons to unlock this one."
+      });
+      return;
+    }
+    
+    setActiveLessonId(lesson.id);
+    navigate(`/learn/lesson/${lesson.id}`);
   };
 
   const getStatusIcon = (lesson: Lesson) => {
@@ -77,17 +89,16 @@ const LearningPath = () => {
                   >
                     {getStatusIcon(lesson)}
                   </div>
+                  {index < lessons.length - 1 && (
+                    <div className="h-12 w-0.5 bg-gray-200 my-2 mx-auto"></div>
+                  )}
                 </div>
                 
                 <div className="flex-1">
                   <LessonCard 
                     lesson={lesson} 
                     isActive={activeLessonId === lesson.id}
-                    onClick={() => {
-                      if (lesson.unlocked) {
-                        handleLessonClick(lesson.id);
-                      }
-                    }}
+                    onClick={() => handleLessonClick(lesson)}
                   />
                 </div>
               </div>

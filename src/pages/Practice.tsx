@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getActivities } from '@/services/learningService';
 import { Activity } from '@/types/learning';
@@ -8,6 +8,7 @@ import VocabularyCategories from '@/components/learning/VocabularyCategories';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, MessageSquare, Gamepad2, Target } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { toast } from "sonner";
 
 const iconMap = {
   BookOpen: <BookOpen className="h-5 w-5" />,
@@ -18,6 +19,7 @@ const iconMap = {
 
 const Practice = () => {
   const activities = getActivities();
+  const [activeTab, setActiveTab] = useState("activities");
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-aqua-lightest to-white">
@@ -33,7 +35,11 @@ const Practice = () => {
           master vocabulary, practice conversations, and test your knowledge.
         </p>
         
-        <Tabs defaultValue="activities" className="max-w-5xl mx-auto">
+        <Tabs 
+          defaultValue="activities" 
+          className="max-w-5xl mx-auto"
+          onValueChange={(value) => setActiveTab(value)}
+        >
           <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger value="activities" className="text-base py-3">Activities</TabsTrigger>
             <TabsTrigger value="vocabulary" className="text-base py-3">Vocabulary</TabsTrigger>
@@ -57,28 +63,48 @@ const Practice = () => {
 };
 
 const ActivityCard = ({ activity }: { activity: Activity }) => {
+  const handleCardClick = () => {
+    // Show a toast when activity is clicked
+    if (activity.type !== "vocabulary") {
+      toast.info(`Opening ${activity.title}`, {
+        description: "This activity is designed to help you practice your Spanish skills."
+      });
+    }
+  };
+
   return (
-    <Link to={`/practice/activity/${activity.id}`} className="block">
-      <div 
-        className={`p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${activity.color} border ${activity.borderColor}`}
-      >
-        <div className="flex items-start gap-4">
-          <div className={`p-3 rounded-full ${activity.color} ${activity.textColor}`}>
-            {/* @ts-ignore */}
-            {iconMap[activity.icon]}
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Link 
+          to={`/practice/activity/${activity.id}`} 
+          className="block"
+          onClick={handleCardClick}
+        >
+          <div 
+            className={`p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${activity.color} border ${activity.borderColor}`}
+          >
+            <div className="flex items-start gap-4">
+              <div className={`p-3 rounded-full ${activity.color} ${activity.textColor}`}>
+                {/* @ts-ignore */}
+                {iconMap[activity.icon]}
+              </div>
+              
+              <div>
+                <h3 className={`text-xl font-semibold mb-2 ${activity.textColor}`}>
+                  {activity.title}
+                </h3>
+                <p className="text-ocean-deep/80">
+                  {activity.description}
+                </p>
+              </div>
+            </div>
           </div>
-          
-          <div>
-            <h3 className={`text-xl font-semibold mb-2 ${activity.textColor}`}>
-              {activity.title}
-            </h3>
-            <p className="text-ocean-deep/80">
-              {activity.description}
-            </p>
-          </div>
-        </div>
-      </div>
-    </Link>
+        </Link>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Click to start this activity</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 
