@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Check, X, ChevronRight, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { QuizQuestion } from '@/types/learning';
+import { toast } from 'sonner';
 
 type QuizProps = {
   questions: QuizQuestion[];
@@ -36,6 +37,14 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
     
     if (selectedOption === currentQuestion.correctAnswer) {
       setCorrectAnswers(prev => prev + 1);
+      toast("¡Correcto! 🎉", {
+        description: "Great job!",
+      });
+    } else {
+      toast("Incorrect", {
+        description: "Don't worry, you'll get it next time!",
+        style: { backgroundColor: "#FEE2E2", color: "#991B1B" }
+      });
     }
   };
 
@@ -57,27 +66,28 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 max-w-2xl mx-auto">
+    <div className="glass-card rounded-xl p-6 max-w-2xl mx-auto bg-white/30 backdrop-blur-sm border border-aqua/20 shadow-lg">
       {!isCompleted ? (
         <>
           <div className="flex justify-between items-center mb-4">
-            <div className="text-sm text-ocean-deep/70">
+            <div className="text-sm text-lumi-purple/70">
               Question {currentQuestionIndex + 1} of {questions.length}
             </div>
-            <div className="bg-primary/10 text-primary px-2 py-1 rounded-full text-sm">
+            <div className="bg-lumi-mint/30 text-lumi-purple px-2 py-1 rounded-full text-sm flex items-center">
+              <Check className="h-3.5 w-3.5 mr-1" />
               {correctAnswers} Correct
             </div>
           </div>
           
           {/* Progress bar */}
-          <div className="h-2 bg-secondary rounded-full mb-6">
+          <div className="h-2 bg-gray-100 rounded-full mb-6">
             <div 
-              className="h-full bg-primary rounded-full transition-all duration-300"
+              className="h-full bg-lumi-pink rounded-full transition-all duration-300"
               style={{ width: `${((currentQuestionIndex) / questions.length) * 100}%` }}
             ></div>
           </div>
           
-          <h3 className="text-xl font-medium mb-6 text-ocean-deep">
+          <h3 className="text-xl font-medium mb-6 text-lumi-purple">
             {currentQuestion.question}
           </h3>
           
@@ -87,24 +97,24 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
                 key={index}
                 className={cn(
                   "p-4 rounded-lg border-2 cursor-pointer transition-all",
-                  selectedOption === index && !showAnswer && "border-primary bg-primary/5",
-                  showAnswer && index === currentQuestion.correctAnswer && "border-green-500 bg-green-100",
-                  showAnswer && selectedOption === index && selectedOption !== currentQuestion.correctAnswer && "border-red-500 bg-red-100",
+                  selectedOption === index && !showAnswer && "border-lumi-pink bg-lumi-pink/5",
+                  showAnswer && index === currentQuestion.correctAnswer && "border-lumi-mint bg-lumi-mint/10",
+                  showAnswer && selectedOption === index && selectedOption !== currentQuestion.correctAnswer && "border-red-400 bg-red-50",
                   showAnswer && selectedOption !== index && index !== currentQuestion.correctAnswer && "opacity-50",
-                  selectedOption !== index && !showAnswer && "border-secondary hover:border-primary/50"
+                  selectedOption !== index && !showAnswer && "border-gray-100 hover:border-lumi-pink/50"
                 )}
                 onClick={() => handleOptionSelect(index)}
               >
                 <div className="flex items-center justify-between">
                   <span className={cn(
-                    showAnswer && index === currentQuestion.correctAnswer && "text-green-700",
-                    showAnswer && selectedOption === index && selectedOption !== currentQuestion.correctAnswer && "text-red-700"
+                    showAnswer && index === currentQuestion.correctAnswer && "text-lumi-purple",
+                    showAnswer && selectedOption === index && selectedOption !== currentQuestion.correctAnswer && "text-red-600"
                   )}>
                     {option}
                   </span>
                   
                   {showAnswer && index === currentQuestion.correctAnswer && (
-                    <Check className="h-5 w-5 text-green-500" />
+                    <Check className="h-5 w-5 text-lumi-mint" />
                   )}
                   
                   {showAnswer && selectedOption === index && selectedOption !== currentQuestion.correctAnswer && (
@@ -119,14 +129,14 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
             <div className="mt-4">
               <button 
                 onClick={toggleHint}
-                className="text-sm flex items-center text-ocean-deep/70 hover:text-primary transition"
+                className="text-sm flex items-center text-lumi-purple/70 hover:text-lumi-pink transition"
               >
                 <HelpCircle className="h-4 w-4 mr-1" />
                 {showHint ? 'Hide Hint' : 'Show Hint'}
               </button>
               
               {showHint && (
-                <div className="mt-2 p-3 bg-ocean-light/50 rounded-lg text-sm text-ocean-deep/80">
+                <div className="mt-2 p-3 bg-lumi-pink/10 rounded-lg text-sm text-lumi-purple/80">
                   {currentQuestion.hint}
                 </div>
               )}
@@ -137,14 +147,14 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
             {!showAnswer ? (
               <button
                 onClick={checkAnswer}
-                className="px-5 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+                className="px-5 py-2 bg-lumi-pink text-white rounded-lg hover:bg-lumi-pink-dark transition"
               >
                 Check Answer
               </button>
             ) : (
               <button
                 onClick={nextQuestion}
-                className="px-5 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition flex items-center"
+                className="px-5 py-2 bg-lumi-pink text-white rounded-lg hover:bg-lumi-pink-dark transition flex items-center"
               >
                 {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Finish Quiz'}
                 <ChevronRight className="ml-1 h-4 w-4" />
@@ -155,23 +165,23 @@ const Quiz = ({ questions, onComplete }: QuizProps) => {
       ) : (
         <div className="text-center py-8">
           <div className="text-6xl mb-4">🎉</div>
-          <h3 className="text-2xl font-bold mb-2 text-ocean-deep">Quiz Complete!</h3>
-          <p className="text-ocean-deep/70 mb-6">
+          <h3 className="text-2xl font-bold mb-2 text-lumi-purple">Quiz Complete!</h3>
+          <p className="text-lumi-purple/70 mb-6">
             You got {correctAnswers} out of {questions.length} questions correct.
           </p>
-          <div className="w-64 h-6 bg-secondary rounded-full mx-auto mb-6">
+          <div className="w-64 h-6 bg-gray-100 rounded-full mx-auto mb-6">
             <div 
               className={cn(
                 "h-full rounded-full transition-all duration-1000",
-                correctAnswers / questions.length >= 0.7 ? "bg-green-500" : 
-                correctAnswers / questions.length >= 0.4 ? "bg-yellow-500" : "bg-red-500"
+                correctAnswers / questions.length >= 0.7 ? "bg-lumi-mint" : 
+                correctAnswers / questions.length >= 0.4 ? "bg-yellow-400" : "bg-red-400"
               )}
               style={{ width: `${(correctAnswers / questions.length) * 100}%` }}
             ></div>
           </div>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+            className="px-6 py-3 bg-lumi-pink text-white rounded-lg hover:bg-lumi-pink-dark transition"
           >
             Try Again
           </button>

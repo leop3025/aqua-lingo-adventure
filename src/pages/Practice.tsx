@@ -1,153 +1,83 @@
 
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from '@/components/layout/Navbar';
-import Quiz from '@/components/learning/Quiz';
-import Confetti from '@/components/ui/Confetti';
-import { Gamepad2, MessageSquare, BookOpen, Target } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { getActivities, getQuizQuestions, completeQuiz } from '@/services/learningService';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getActivities } from '@/services/learningService';
 import { Activity } from '@/types/learning';
+import Navbar from '@/components/layout/Navbar';
+import VocabularyCategories from '@/components/learning/VocabularyCategories';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BookOpen, MessageSquare, Gamepad2, Target } from 'lucide-react';
+
+const iconMap = {
+  BookOpen: <BookOpen className="h-5 w-5" />,
+  MessageSquare: <MessageSquare className="h-5 w-5" />,
+  Gamepad2: <Gamepad2 className="h-5 w-5" />,
+  Target: <Target className="h-5 w-5" />
+};
 
 const Practice = () => {
-  const navigate = useNavigate();
-  const [loaded, setLoaded] = useState(false);
-  const [activeTab, setActiveTab] = useState('games');
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [quizQuestions, setQuizQuestions] = useState<any[]>([]);
-  
-  useEffect(() => {
-    setLoaded(true);
-    setActivities(getActivities());
-    setQuizQuestions(getQuizQuestions());
-  }, []);
-  
-  const handleQuizComplete = (score: number) => {
-    // Save quiz results
-    completeQuiz(score, quizQuestions.length);
-    
-    if (score >= 3) {
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 4000);
-    }
-  };
-
-  const handleActivityClick = (activityId: string) => {
-    navigate(`/practice/activity/${activityId}`);
-  };
+  const activities = getActivities();
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-aqua-lightest to-white">
       <Navbar />
-      <Confetti active={showConfetti} />
       
-      <main className="container mx-auto px-4 pt-24 pb-16">
-        <section className={cn(
-          "transition-all duration-700 transform",
-          loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        )}>
-          <div className="mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-ocean-deep mb-2">
-              Practice Your Spanish
-            </h1>
-            <p className="text-ocean-deep/70">
-              Strengthen your skills with fun games and quizzes
-            </p>
-          </div>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center text-lumi-purple">
+          Practice Your Spanish
+        </h1>
+        
+        <p className="text-center text-ocean-deep/80 mb-8 max-w-3xl mx-auto">
+          Improve your Spanish skills with these interactive activities designed to help you
+          master vocabulary, practice conversations, and test your knowledge.
+        </p>
+        
+        <Tabs defaultValue="activities" className="max-w-5xl mx-auto">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="activities" className="text-base py-3">Activities</TabsTrigger>
+            <TabsTrigger value="vocabulary" className="text-base py-3">Vocabulary</TabsTrigger>
+          </TabsList>
           
-          <div className="mb-8">
-            <div className="flex space-x-2 overflow-x-auto pb-2">
-              <button
-                onClick={() => setActiveTab('games')}
-                className={cn(
-                  "px-4 py-2 rounded-full font-medium transition-all",
-                  activeTab === 'games' 
-                    ? "bg-primary text-white" 
-                    : "bg-secondary hover:bg-secondary/80"
-                )}
-              >
-                Games & Activities
-              </button>
-              <button
-                onClick={() => setActiveTab('quiz')}
-                className={cn(
-                  "px-4 py-2 rounded-full font-medium transition-all",
-                  activeTab === 'quiz' 
-                    ? "bg-primary text-white" 
-                    : "bg-secondary hover:bg-secondary/80"
-                )}
-              >
-                Daily Quiz
-              </button>
-            </div>
-          </div>
-          
-          {activeTab === 'games' ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {activities.map((activity, index) => (
-                <div 
-                  key={index}
-                  className={cn(
-                    "p-6 rounded-xl border transition-all",
-                    activity.color,
-                    activity.borderColor,
-                    "hover:shadow-lg cursor-pointer",
-                    "transform transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                  )}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                  onClick={() => handleActivityClick(activity.id)}
-                >
-                  <div className="flex items-start">
-                    <div className={cn(
-                      "p-3 rounded-lg mr-4",
-                      activity.color
-                    )}>
-                      {activity.icon === "BookOpen" && <BookOpen className="h-8 w-8" />}
-                      {activity.icon === "MessageSquare" && <MessageSquare className="h-8 w-8" />}
-                      {activity.icon === "Gamepad2" && <Gamepad2 className="h-8 w-8" />}
-                      {activity.icon === "Target" && <Target className="h-8 w-8" />}
-                    </div>
-                    <div>
-                      <h3 className={cn(
-                        "text-xl font-semibold mb-2",
-                        activity.textColor
-                      )}>
-                        {activity.title}
-                      </h3>
-                      <p className="text-ocean-deep/70">
-                        {activity.description}
-                      </p>
-                      <div className="mt-4">
-                        <span className={cn(
-                          "inline-flex items-center text-sm font-medium",
-                          activity.textColor
-                        )}>
-                          Play Now
-                          <svg className="ml-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <TabsContent value="activities">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+              {activities.map((activity) => (
+                <ActivityCard key={activity.id} activity={activity} />
               ))}
             </div>
-          ) : (
-            <div>
-              <h2 className="text-2xl font-bold mb-6 text-ocean-deep">
-                Daily Spanish Quiz
-              </h2>
-              <Quiz 
-                questions={quizQuestions} 
-                onComplete={handleQuizComplete} 
-              />
-            </div>
-          )}
-        </section>
-      </main>
+          </TabsContent>
+          
+          <TabsContent value="vocabulary">
+            <VocabularyCategories />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
+  );
+};
+
+const ActivityCard = ({ activity }: { activity: Activity }) => {
+  return (
+    <Link to={`/practice/activity/${activity.id}`} className="block">
+      <div 
+        className={`p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${activity.color} border ${activity.borderColor}`}
+      >
+        <div className="flex items-start gap-4">
+          <div className={`p-3 rounded-full ${activity.color} ${activity.textColor}`}>
+            {/* @ts-ignore */}
+            {iconMap[activity.icon]}
+          </div>
+          
+          <div>
+            <h3 className={`text-xl font-semibold mb-2 ${activity.textColor}`}>
+              {activity.title}
+            </h3>
+            <p className="text-ocean-deep/80">
+              {activity.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 };
 

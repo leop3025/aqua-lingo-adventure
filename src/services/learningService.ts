@@ -4,7 +4,8 @@ import {
   Lesson, 
   Word, 
   QuizQuestion,
-  Activity
+  Activity,
+  VocabularyCategory
 } from '@/types/learning';
 
 // Mock user data
@@ -193,19 +194,112 @@ const lessonsData: Lesson[] = [
   }
 ];
 
-// Mock vocabulary words
+// Vocabulary categories
+const vocabularyCategoriesData: VocabularyCategory[] = [
+  {
+    id: "cat1",
+    name: "Greetings",
+    description: "Common phrases for greeting people",
+    iconName: "Wave",
+    wordCount: 15
+  },
+  {
+    id: "cat2",
+    name: "Numbers",
+    description: "Numbers and counting",
+    iconName: "Hash",
+    wordCount: 40
+  },
+  {
+    id: "cat3",
+    name: "Food & Dining",
+    description: "Food, restaurants, and eating",
+    iconName: "Utensils",
+    wordCount: 50
+  },
+  {
+    id: "cat4",
+    name: "Family",
+    description: "Family members and relationships",
+    iconName: "Users",
+    wordCount: 25
+  },
+  {
+    id: "cat5",
+    name: "Travel",
+    description: "Travel, directions, and transportation",
+    iconName: "Map",
+    wordCount: 45
+  },
+  {
+    id: "cat6",
+    name: "Time & Date",
+    description: "Telling time and dates",
+    iconName: "Clock",
+    wordCount: 30
+  },
+  {
+    id: "cat7",
+    name: "Shopping",
+    description: "Shopping and money",
+    iconName: "ShoppingBag",
+    wordCount: 35
+  },
+  {
+    id: "cat8",
+    name: "Weather",
+    description: "Weather expressions",
+    iconName: "Cloud",
+    wordCount: 20
+  }
+];
+
+// Extended vocabulary words
 const vocabularyData: Word[] = [
-  { id: "w1", spanish: "hola", english: "hello", category: "greetings", learned: true },
-  { id: "w2", spanish: "adiós", english: "goodbye", category: "greetings", learned: true },
-  { id: "w3", spanish: "gracias", english: "thank you", category: "common phrases", learned: true },
-  { id: "w4", spanish: "por favor", english: "please", category: "common phrases", learned: true },
-  { id: "w5", spanish: "uno", english: "one", category: "numbers", learned: true },
-  { id: "w6", spanish: "dos", english: "two", category: "numbers", learned: true },
-  { id: "w7", spanish: "tres", english: "three", category: "numbers", learned: true },
-  { id: "w8", spanish: "cuatro", english: "four", category: "numbers", learned: true },
-  { id: "w9", spanish: "agua", english: "water", category: "food", learned: true },
-  { id: "w10", spanish: "pan", english: "bread", category: "food", learned: true },
-  // More vocabulary words...
+  { id: "w1", spanish: "hola", english: "hello", category: "greetings", learned: true, pronunciation: "OH-lah", example: "¡Hola! ¿Cómo estás?" },
+  { id: "w2", spanish: "adiós", english: "goodbye", category: "greetings", learned: true, pronunciation: "ah-DYOHS", example: "Adiós, hasta mañana." },
+  { id: "w3", spanish: "gracias", english: "thank you", category: "greetings", learned: true, pronunciation: "GRAH-syahs", example: "Muchas gracias por tu ayuda." },
+  { id: "w4", spanish: "por favor", english: "please", category: "greetings", learned: true, pronunciation: "pohr fah-VOHR", example: "Por favor, pásame el agua." },
+  { id: "w5", spanish: "buenos días", english: "good morning", category: "greetings", learned: false, pronunciation: "BWEH-nohs DEE-ahs", example: "Buenos días, ¿cómo amaneciste?" },
+  { id: "w6", spanish: "buenas tardes", english: "good afternoon", category: "greetings", learned: false, pronunciation: "BWEH-nahs TAR-dehs", example: "Buenas tardes a todos." },
+  { id: "w7", spanish: "buenas noches", english: "good evening/night", category: "greetings", learned: false, pronunciation: "BWEH-nahs NOH-chehs", example: "Buenas noches, que descanses." },
+  { id: "w8", spanish: "hasta luego", english: "see you later", category: "greetings", learned: false, pronunciation: "AHS-tah LWEH-goh", example: "Hasta luego, nos vemos mañana." },
+  { id: "w9", spanish: "bienvenido", english: "welcome", category: "greetings", learned: false, pronunciation: "byen-beh-NEE-doh", example: "¡Bienvenido a nuestra casa!" },
+  { id: "w10", spanish: "mucho gusto", english: "nice to meet you", category: "greetings", learned: false, pronunciation: "MOO-choh GOOS-toh", example: "Mucho gusto, me llamo Juan." },
+  
+  { id: "w11", spanish: "uno", english: "one", category: "numbers", learned: true, pronunciation: "OO-noh", example: "Tengo un perro." },
+  { id: "w12", spanish: "dos", english: "two", category: "numbers", learned: true, pronunciation: "dohs", example: "Hay dos libros en la mesa." },
+  { id: "w13", spanish: "tres", english: "three", category: "numbers", learned: true, pronunciation: "trehs", example: "Necesito tres manzanas." },
+  { id: "w14", spanish: "cuatro", english: "four", category: "numbers", learned: true, pronunciation: "KWAH-troh", example: "Hay cuatro personas en mi familia." },
+  { id: "w15", spanish: "cinco", english: "five", category: "numbers", learned: false, pronunciation: "SEEN-koh", example: "Tengo cinco dedos en cada mano." },
+  { id: "w16", spanish: "seis", english: "six", category: "numbers", learned: false, pronunciation: "sehs", example: "El partido empieza a las seis." },
+  { id: "w17", spanish: "siete", english: "seven", category: "numbers", learned: false, pronunciation: "SYEH-teh", example: "Son las siete de la noche." },
+  { id: "w18", spanish: "ocho", english: "eight", category: "numbers", learned: false, pronunciation: "OH-choh", example: "Hay ocho planetas en el sistema solar." },
+  { id: "w19", spanish: "nueve", english: "nine", category: "numbers", learned: false, pronunciation: "NWEH-beh", example: "Mi cumpleaños es el nueve de julio." },
+  { id: "w20", spanish: "diez", english: "ten", category: "numbers", learned: false, pronunciation: "dyehs", example: "Necesito diez dólares." },
+  
+  { id: "w21", spanish: "agua", english: "water", category: "food", learned: true, pronunciation: "AH-gwah", example: "Me gustaría un vaso de agua, por favor." },
+  { id: "w22", spanish: "pan", english: "bread", category: "food", learned: true, pronunciation: "pahn", example: "Me gusta comer pan fresco." },
+  { id: "w23", spanish: "queso", english: "cheese", category: "food", learned: false, pronunciation: "KEH-soh", example: "Este sandwich tiene queso y jamón." },
+  { id: "w24", spanish: "manzana", english: "apple", category: "food", learned: false, pronunciation: "mahn-SAH-nah", example: "Como una manzana cada día." },
+  { id: "w25", spanish: "café", english: "coffee", category: "food", learned: false, pronunciation: "kah-FEH", example: "Me gusta el café con leche." },
+  { id: "w26", spanish: "leche", english: "milk", category: "food", learned: false, pronunciation: "LEH-cheh", example: "Los niños beben leche." },
+  { id: "w27", spanish: "pollo", english: "chicken", category: "food", learned: false, pronunciation: "POH-yoh", example: "Vamos a comer pollo para la cena." },
+  { id: "w28", spanish: "arroz", english: "rice", category: "food", learned: false, pronunciation: "ah-ROHS", example: "El arroz es un acompañamiento común." },
+  { id: "w29", spanish: "huevo", english: "egg", category: "food", learned: false, pronunciation: "WEH-boh", example: "Me gustan los huevos revueltos." },
+  { id: "w30", spanish: "pescado", english: "fish", category: "food", learned: false, pronunciation: "pehs-KAH-doh", example: "El pescado es saludable." },
+  
+  { id: "w31", spanish: "madre", english: "mother", category: "family", learned: false, pronunciation: "MAH-dreh", example: "Mi madre es muy cariñosa." },
+  { id: "w32", spanish: "padre", english: "father", category: "family", learned: false, pronunciation: "PAH-dreh", example: "Mi padre trabaja mucho." },
+  { id: "w33", spanish: "hermano", english: "brother", category: "family", learned: false, pronunciation: "ehr-MAH-noh", example: "Mi hermano es mayor que yo." },
+  { id: "w34", spanish: "hermana", english: "sister", category: "family", learned: false, pronunciation: "ehr-MAH-nah", example: "Mi hermana vive en Madrid." },
+  { id: "w35", spanish: "hijo", english: "son", category: "family", learned: false, pronunciation: "EE-hoh", example: "Su hijo tiene cinco años." },
+  
+  { id: "w36", spanish: "coche", english: "car", category: "travel", learned: false, pronunciation: "KOH-cheh", example: "Vamos en coche a la playa." },
+  { id: "w37", spanish: "tren", english: "train", category: "travel", learned: false, pronunciation: "trehn", example: "El tren llega a las tres." },
+  { id: "w38", spanish: "avión", english: "airplane", category: "travel", learned: false, pronunciation: "ah-BYOHN", example: "Viajamos en avión a España." },
+  { id: "w39", spanish: "hotel", english: "hotel", category: "travel", learned: false, pronunciation: "oh-TEHL", example: "Nos hospedamos en un hotel cerca de la playa." },
+  { id: "w40", spanish: "pasaporte", english: "passport", category: "travel", learned: false, pronunciation: "pah-sah-POHR-teh", example: "No olvides tu pasaporte." }
 ];
 
 // Quiz questions
@@ -515,6 +609,10 @@ export const getVocabularyByCategory = (category: string): Word[] => {
   return vocabulary.filter(word => word.category === category);
 };
 
+export const getVocabularyCategories = (): VocabularyCategory[] => {
+  return vocabularyCategoriesData;
+};
+
 export const markWordAsLearned = (id: string): Word[] => {
   const vocabulary = getVocabulary();
   
@@ -549,6 +647,26 @@ export const markWordAsLearned = (id: string): Word[] => {
 // Activities related methods
 export const getActivities = (): Activity[] => {
   return activitiesData;
+};
+
+// Get vocabulary statistics
+export const getVocabularyStats = () => {
+  const vocabulary = getVocabulary();
+  const totalWords = vocabulary.length;
+  const learnedWords = vocabulary.filter(word => word.learned).length;
+  const learnedPercentage = totalWords > 0 ? Math.round((learnedWords / totalWords) * 100) : 0;
+  
+  const categoryCounts = vocabulary.reduce((acc, word) => {
+    acc[word.category] = (acc[word.category] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+  
+  return {
+    totalWords,
+    learnedWords,
+    learnedPercentage,
+    categoryCounts
+  };
 };
 
 // Initialize data when the service is first imported

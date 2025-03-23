@@ -47,6 +47,8 @@ export interface Word {
   english: string;
   category: string;
   learned: boolean;
+  example?: string;
+  pronunciation?: string;
 }
 
 export interface QuizQuestion {
@@ -67,4 +69,12 @@ export interface Activity {
   textColor: string;
   type: "vocabulary" | "conversation" | "memory" | "listening";
   content?: any;
+}
+
+export interface VocabularyCategory {
+  id: string;
+  name: string;
+  description: string;
+  iconName: string;
+  wordCount: number;
 }
