@@ -68,7 +68,7 @@ const Index = () => {
               <div className="flex items-center space-x-2 mb-4">
                 <div className="bg-lumi-pink w-10 h-10 rounded-full flex items-center justify-center">
                   <img 
-                    src="/lovable-uploads/844eae2a-50a8-472a-bab4-19ab855d4155.png" 
+                    src="/lovable-uploads/106d3c10-76c0-4fd6-bc8e-7c19c7850852.png" 
                     alt="Lumi mascot" 
                     className="h-8 w-8 object-contain" 
                   />

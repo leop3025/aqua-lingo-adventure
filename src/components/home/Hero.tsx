@@ -94,7 +94,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-aqua/20 blur-3xl rounded-full transform -translate-y-10"></div>
               <div className="bg-aqua-lightest rounded-full p-8 relative">
                 <img
-                  src="/lovable-uploads/844eae2a-50a8-472a-bab4-19ab855d4155.png"
+                  src="/lovable-uploads/106d3c10-76c0-4fd6-bc8e-7c19c7850852.png"
                   alt="Lumi the friendly mascot"
                   className="floating relative max-w-xs md:max-w-sm"
                   style={{ objectFit: 'contain', maxHeight: '300px' }}
